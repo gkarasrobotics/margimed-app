@@ -220,24 +220,38 @@ async function loadData() {
   } catch(e) { console.error(e); }
 }
 
+// Στο booking.html, βρείτε τη συνάρτηση getAvailableSlots και αντικαταστήστε την:
 function getAvailableSlots(doctorId, date) {
   const settings = doctorSettings[doctorId];
-  if(!settings || !settings.timeRanges.length) return [];
-  const existingCount = appointments.filter(a => a.doctorId==doctorId && a.date===date && a.status!=='cancelled').length;
-  if(existingCount >= settings.maxPerDay) return [];
-  const booked = new Set(appointments.filter(a=>a.doctorId==doctorId && a.date===date && a.status!=='cancelled').map(a=>a.time));
+  if (!settings || !settings.timeRanges.length) return [];
+  
+  // Έλεγχος ημέρας λειτουργίας (αν υπάρχει daysOfWeek)
+  const dateObj = new Date(date + 'T00:00:00');
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const dayName = dayNames[dateObj.getDay()];
+  if (settings.daysOfWeek && !settings.daysOfWeek.includes(dayName)) {
+    return []; // Δεν λειτουργεί αυτή την ημέρα
+  }
+  
+  const existingCount = appointments.filter(a => a.doctorId == doctorId && a.date === date && a.status !== 'cancelled').length;
+  if (existingCount >= settings.maxPerDay) return [];
+  
+  const booked = new Set(appointments.filter(a => a.doctorId == doctorId && a.date === date && a.status !== 'cancelled').map(a => a.time));
   const slots = [];
-  for(let range of settings.timeRanges) {
+  const slotDuration = settings.slotDuration || settings.duration || 30; // χρήση του νέου πεδίου
+  
+  for (let range of settings.timeRanges) {
     let cur = new Date(`2000-01-01T${range.start}:00`);
     let end = new Date(`2000-01-01T${range.end}:00`);
-    while(cur < end) {
+    while (cur < end) {
       let t = cur.toTimeString().slice(0,5);
-      if(!booked.has(t)) slots.push(t);
-      cur.setMinutes(cur.getMinutes() + settings.duration);
+      if (!booked.has(t)) slots.push(t);
+      cur.setMinutes(cur.getMinutes() + slotDuration);
     }
   }
   return slots;
 }
+
 
 function selectDoctor(id) {
   selectedDoctorId = id;
@@ -285,6 +299,7 @@ function goBackToStep1() {
   document.getElementById('stepPanel1').style.display='block';
   document.getElementById('stepPanel2').style.display='none';
 }
+// Αντικαταστήστε και τη submitBooking για να χρησιμοποιεί τον έλεγχο διπλοκρατήσεων:
 async function submitBooking() {
   const surname = document.getElementById('patSurname').value.trim();
   const name = document.getElementById('patName').value.trim();
@@ -300,10 +315,26 @@ async function submitBooking() {
   if(errors) { document.getElementById('formErrors').innerText='Συμπληρώστε: '+errors; return; }
   document.getElementById('formErrors').innerText='';
   try {
+    // Βήμα 1: Βρες ή δημιούργησε ασθενή
     const patientsRes = await apiGet('patients');
     let patient = patientsRes.data.find(p => p.surname===surname && p.name===name && p.mobile===mobile);
-    if(!patient) patient = await apiPost('patients', {surname, name, mobile, email, country:'Ελλάδα', referral:'Online'});
-    await apiPost('appointments', { doctorId:selectedDoctorId, patientId:patient.id, patientName:`${surname} ${name}`, patientPhone:mobile, date:selectedDate, time:selectedTime, status:'pending', source:'online', notes });
+    if(!patient) {
+      patient = await apiPost('patients', {surname, name, mobile, email, country:'Ελλάδα', referral:'Online'});
+    }
+    // Βήμα 2: Δημιουργία ραντεβού (το backend θα αποτρέψει διπλοκράτηση)
+    const appointmentData = {
+      doctorId: selectedDoctorId,
+      patientId: patient.id,
+      patientName: `${surname} ${name}`,
+      patientPhone: mobile,
+      date: selectedDate,
+      time: selectedTime,
+      status: 'pending',
+      source: 'online',
+      notes: notes
+    };
+    const appointment = await apiPost('appointments', appointmentData);
+    // Επιτυχία
     document.getElementById('confDoctor').innerText = selectedDoctorId===1?'Παιδίατρος Μαρία Γκαρα':'Παθολόγος Ιωάννης Γεωργατζίνος';
     document.getElementById('confDate').innerText = new Date(selectedDate+'T00:00:00').toLocaleDateString('el-GR');
     document.getElementById('confTime').innerText = selectedTime;
@@ -315,9 +346,12 @@ async function submitBooking() {
     document.getElementById('stepPanel2').style.display='none';
     document.getElementById('successScreen').classList.add('visible');
     window.scrollTo({top:0});
-  } catch(e) { alert('Σφάλμα: '+e.message); }
-}
-function resetBooking() {
+  } catch(e) {
+    let msg = e.message;
+    if (e.status === 409) msg = 'Η επιλεγμένη ώρα είναι ήδη κλεισμένη. Παρακαλώ επιλέξτε άλλη.';
+    alert('Σφάλμα: ' + msg);
+  }
+}function resetBooking() {
   selectedDoctorId=1; selectedDate=''; selectedTime='';
   document.getElementById('patientForm')?.reset();
   document.getElementById('bookingDate').value='';
@@ -337,3 +371,11 @@ loadData();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+

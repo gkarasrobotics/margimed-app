@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MARGIMED CLINIC - Online κράτηση ραντεβού. Επιλέξτε γιατρό, ημερομηνία και ώρα εύκολα και γρήγορα.">
+  <meta name="keywords" content="MARGIMED, κλινική, ραντεβού, online κράτηση, παιδίατρος, παθολόγος">
+  <meta property="og:title" content="MARGIMED CLINIC | Online Κράτηση Ραντεβού">
+  <meta property="og:description" content="Κλείστε ραντεβού online εύκολα και γρήγορα στη MARGIMED CLINIC">
+  <meta property="og:type" content="website">
+  <title>MARGIMED CLINIC | Online Κράτηση Ραντεβού</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1565C0;
+      --primary-light: #1976D2;
+      --primary-dark: #0D47A1;
+      --primary-subtle: #E3F2FD;
+      --secondary: #00897B;
+      --secondary-light: #E0F2F1;
+      --accent: #FF6F00;
+      --accent-light: #FFF3E0;
+      --danger: #C62828;
+      --danger-light: #FFEBEE;
+      --success: #2E7D32;
+      --success-light: #E8F5E9;
+      --warning: #F57F17;
+      --warning-light: #FFF8E1;
+      --text-primary: #1A237E;
+      --text-secondary: #37474F;
+      --text-muted: #78909C;
+      --bg: #F0F4F8;
+      --white: #FFFFFF;
+      --border: #CFD8DC;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 32px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(21,101,192,0.13);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-secondary);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      color: white;
+      padding: 0;
+    }
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 24px 36px;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .header-logo {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.18);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .header-brand-text h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .header-brand-text p {
+      font-size: 0.82rem;
+      opacity: 0.75;
+      margin-top: 2px;
+    }
+    .header-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    .header-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .header-badge {
+      background: rgba(255,255,255,0.18);
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+      margin-top: -16px;
+    }
+
+    /* ===== STEPPER ===== */
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+    .step-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      background: white;
+      transition: all 0.3s;
+    }
+    .step.active .step-num { background: var(--primary); color: white; border-color: var(--primary); }
+    .step.done .step-num { background: var(--success); color: white; border-color: var(--success); }
+    .step-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .step.active .step-label { color: var(--primary); }
+    .step.done .step-label { color: var(--success); }
+    .step-connector {
+      height: 2px;
+      background: var(--border);
+      flex: 1;
+      margin: 0 8px;
+      transition: background 0.3s;
+    }
+    .step-connector.done { background: var(--success); }
+    @media (max-width: 480px) { .step-label { display: none; } }
+
+    /* ===== CARD ===== */
+    .card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(207,216,220,0.5);
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: var(--shadow-lg); }
+    .card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid #F0F4F8;
+      background: #FAFBFC;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: var(--primary-subtle);
+      color: var(--primary);
+    }
+    .card-header h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .card-body { padding: 24px; }
+
+    /* ===== DOCTOR SELECTION ===== */
+    .doctor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .doctor-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+      background: white;
+      position: relative;
+    }
+    .doctor-card:hover { border-color: var(--primary-light); background: var(--primary-subtle); }
+    .doctor-card.selected { border-color: var(--primary); background: var(--primary-subtle); box-shadow: 0 0 0 3px rgba(21,101,192,0.15); }
+    .doctor-card.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 22px; height: 22px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .doctor-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .doctor-avatar.maria { background: #FCE4EC; }
+    .doctor-avatar.giannis { background: #E3F2FD; }
+    .doctor-name { font-weight: 700; color: var(--text-primary); font-size: 0.95rem; }
+    .doctor-specialty { font-size: 0.78rem; color: var(--text-muted); }
+    .doctor-info { font-size: 0.75rem; color: var(--text-secondary); background: #F8FAFC; border-radius: var(--radius-sm); padding: 6px 10px; width: 100%; text-align: left; }
+
+    /* ===== DATE PICKER ===== */
+    .date-section { margin-top: 16px; }
+    .date-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+    .date-input {
+      width: 100%;
+      max-width: 280px;
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-secondary);
+      transition: border-color 0.15s;
+    }
+    .date-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
+
+    /* ===== TIME SLOTS ===== */
+    .slots-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .slots-count { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+    .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
+    .slot-btn {
+      padding: 10px 6px;
+      border: 2px solid var(--primary-light);
+      border-radius: var(--radius-sm);
+      background: var(--primary-subtle);
+      color: var(--primary);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+      font-family: inherit;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .slot-btn:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .slot-btn.selected { background: var(--secondary); color: white; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(0,137,123,0.2); transform: translateY(-2px); }
+    .no-slots {
+      background: #F8FAFC;
+      border-radius: var(--radius-md);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .no-slots i { font-size: 2rem; display: block; margin-bottom: 10px; }
+    .loading-slots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 30px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .mini-spinner {
+      width: 20px; height: 20px;
+      border: 2px solid #E3F2FD;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== PATIENT FORM ===== */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group.full { grid-column: 1/-1; }
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .form-label .required { color: var(--danger); margin-left: 2px; }
+    .form-control {
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text-secondary);
+      background: white;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
+    }
+    .form-control.error { border-color: var(--danger); }
+    .form-error { font-size: 0.75rem; color: var(--danger); font-weight: 500; display: none; }
+    .form-error.visible { display: block; }
+    select.form-control { cursor: pointer; }
+
+    /* ===== SUMMARY BOX ===== */
+    .summary-box {
+      background: var(--primary-subtle);
+      border: 2px solid #BBDEFB;
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .summary-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--primary); margin-bottom: 12px; }
+    .summary-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #BBDEFB; font-size: 0.9rem; }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row i { width: 18px; color: var(--primary); font-size: 0.85rem; }
+    .summary-row strong { font-weight: 600; color: var(--text-primary); }
+
+    /* ===== SUBMIT BUTTON ===== */
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 24px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      letter-spacing: 0.3px;
+    }
+    .submit-btn:hover { background: #00796B; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,137,123,0.3); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { background: #B0BEC5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ===== SUCCESS STATE ===== */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 50px 30px;
+    }
+    .success-screen.visible { display: block; }
+    .success-icon {
+      width: 80px; height: 80px;
+      background: var(--success-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--success);
+      margin: 0 auto 20px;
+      border: 3px solid #A5D6A7;
+    }
+    .success-screen h2 { font-size: 1.5rem; font-weight: 800; color: var(--text-primary); margin-bottom: 10px; }
+    .success-screen p { color: var(--text-muted); margin-bottom: 24px; }
+    .success-details {
+      background: var(--success-light);
+      border: 1px solid #A5D6A7;
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: left;
+      max-width: 380px;
+      margin: 0 auto 24px;
+    }
+    .success-detail-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 0.9rem; }
+    .success-detail-row i { width: 18px; color: var(--success); }
+
+    /* ===== PROGRESS INDICATOR ===== */
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 16px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    /* ===== ALERTS ===== */
+    .alert {
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+    .alert-info { background: var(--primary-subtle); border-left: 4px solid var(--primary); color: var(--primary-dark); }
+    .alert-warning { background: var(--warning-light); border-left: 4px solid var(--warning); color: #7f4300; }
+    .alert-error { background: var(--danger-light); border-left: 4px solid var(--danger); color: var(--danger); }
+    .alert i { flex-shrink: 0; margin-top: 2px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 20px 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+
+    /* ===== TRUST BADGES ===== */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .trust-badge i { opacity: 0.9; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .header-title { font-size: 1.4rem; }
+      .doctor-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .stepper { padding: 14px 16px; }
+      .card-body { padding: 18px; }
+      .slot-grid { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); }
+    }
+    @media (max-width: 400px) {
+      .slot-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header role="banner">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo" aria-hidden="true">
+        <i class="fas fa-hospital-user"></i>
+      </div>
+      <div class="header-brand-text">
+        <h1>MARGIMED CLINIC</h1>
+        <p>Ολοκληρωμένη Ιατρική Φροντίδα</p>
+      </div>
+    </div>
+    <div class="header-title">Online Κράτηση Ραντεβού</div>
+    <div class="header-subtitle">
+      <span><i class="fas fa-clock" aria-hidden="true"></i> Γρήγορη & εύκολη κράτηση</span>
+      <span class="header-badge"><i class="fas fa-shield-alt" aria-hidden="true"></i> Ασφαλής</span>
+      <span class="header-badge"><i class="fas fa-check-circle" aria-hidden="true"></i> Δωρεάν</span>
+    </div>
+    <div class="trust-badges">
+      <div class="trust-badge"><i class="fas fa-lock" aria-hidden="true"></i> Ασφαλής σύνδεση</div>
+      <div class="trust-badge"><i class="fas fa-user-md" aria-hidden="true"></i> Εξειδικευμένοι γιατροί</div>
+      <div class="trust-badge"><i class="fas fa-calendar-check" aria-hidden="true"></i> Άμεση επιβεβαίωση</div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main role="main">
+
+  <!-- Stepper -->
+  <div class="stepper" role="navigation" aria-label="Βήματα κράτησης">
+    <div class="step active" id="step1" aria-current="step">
+      <div class="step-num" aria-hidden="true">1</div>
+      <span class="step-label">Γιατρός & Ημερομηνία</span>
+    </div>
+    <div class="step-connector" id="conn1"></div>
+    <div class="step" id="step2">
+      <div class="step-num" aria-hidden="true">2</div>
+      <span class="step-label">Επιλογή Ώρας</span>
+    </div>
+    <div class="step-connector" id="conn2"></div>
+    <div class="step" id="step3">
+      <div class="step-num" aria-hidden="true">3</div>
+      <span class="step-label">Στοιχεία</span>
+    </div>
+    <div class="step-connector" id="conn3"></div>
+    <div class="step" id="step4">
+      <div class="step-num" aria-hidden="true">4</div>
+      <span class="step-label">Επιβεβαίωση</span>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" id="progressBar">
+    <div class="progress-fill" id="progressFill" style="width:25%"></div>
+  </div>
+
+  <!-- === STEP 1: Doctor & Date === -->
+  <div id="stepPanel1">
+    <!-- Doctor Selection -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon" aria-hidden="true"><i class="fas fa-user-md"></i></div>
+        <h2>Επιλέξτε Γιατρό</h2>
+      </div>
+      <div class="card-body">
+        <div class="doctor-grid" role="radiogroup" aria-label="Επιλογή γιατρού">
+          <div class="doctor-card selected" id="doctorCard1" onclick="selectDoctor(1)" role="radio" aria-checked="true" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')selectDoctor(1)">
+            <div class="doctor-avatar maria" aria-hidden="true"><i class="fas fa-user-nurse"></i></div>
+            <div class="doctor-name">Μαρία Γκαρα</div>
+            <div class="doctor-specialty">Παιδίατρος</div>
+            <div class="doctor-info">
+              <div><i class="fas fa-clock" style="color:var(--primary);margin-right:4px"></i>09:00–13:00 | 17:00–20:00</div>
+              <div><i class="fas fa-calendar" style="color:var(--primary);margin-right:4px"></i>Δευ – Παρ</div>
+            </div>
+          </div>
+          <div class="doctor-card" id="doctorCard2" onclick="selectDoctor(2)" role="radio" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')selectDoctor(2)">
+            <div class="doctor-avatar giannis" aria-hidden="true"><i class="fas fa-stethoscope"></i></div>
+            <div class="doctor-name">Ιωάννης Γεωργατζίνος</div>
+            <div class="doctor-specialty">Παθολόγος – Γενικός Ιατρός</div>
+            <div class="doctor-info">
+              <div><i class="fas fa-clock" style="color:var(--primary);margin-right:4px"></i>10:00–14:00 | 18:00–21:00</div>
+              <div><i class="fas fa-calendar" style="color:var(--primary);margin-right:4px"></i>Δευ – Παρ</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date Selection -->
+        <div class="date-section">
+          <label class="date-label" for="bookingDate">
+            <i class="fas fa-calendar-alt" style="color:var(--primary);margin-right:5px"></i>
+            Επιλέξτε Ημερομηνία <span style="color:var(--danger)">*</span>
+          </label>
+          <input type="date" id="bookingDate" class="date-input" oninput="onDateChange()" aria-label="Ημερομηνία ραντεβού" aria-required="true">
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">
+            <i class="fas fa-info-circle" aria-hidden="true"></i>
+            Διαθέσιμες ημερομηνίες: σήμερα έως 30 ημέρες μπροστά
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slots -->
+    <div class="card" id="slotsCard" style="display:none">
+      <div class="card-header">
+        <div class="card-header-icon" aria-hidden="true"><i class="fas fa-clock"></i></div>
+        <h2>Διαθέσιμες Ώρες</h2>
+      </div>
+      <div class="card-body">
+        <div id="slotsContainer" role="group" aria-label="Διαθέσιμες ώρες ραντεβού"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === STEP 2: Patient Details === -->
+  <div id="stepPanel2" style="display:none">
+    <!-- Booking Summary -->
+    <div class="summary-box" id="bookingSummary" role="region" aria-label="Σύνοψη κράτησης">
+      <div class="summary-title"><i class="fas fa-calendar-check" style="margin-right:5px" aria-hidden="true"></i>Σύνοψη Κράτησης</div>
+      <div class="summary-row">
+        <i class="fas fa-user-md" aria-hidden="true"></i>
+        <span><strong id="summaryDoctor">—</strong></span>
+      </div>
+      <div class="summary-row">
+        <i class="fas fa-calendar" aria-hidden="true"></i>
+        <span id="summaryDate">—</span>
+      </div>
+      <div class="summary-row">
+        <i class="fas fa-clock" aria-hidden="true"></i>
+        <span><strong id="summaryTime">—</strong></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon" aria-hidden="true"><i class="fas fa-user"></i></div>
+        <h2>Τα Στοιχεία Σας</h2>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info" role="note">
+          <i class="fas fa-shield-alt" aria-hidden="true"></i>
+          <span>Τα στοιχεία σας χρησιμοποιούνται μόνο για την επιβεβαίωση του ραντεβού και την επικοινωνία με την κλινική.</span>
+        </div>
+
+        <form id="patientForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="patSurname">Επώνυμο <span class="required">*</span></label>
+              <input type="text" id="patSurname" class="form-control" placeholder="Παπαδόπουλος" autocomplete="family-name" required aria-required="true">
+              <span class="form-error" id="err-surname" role="alert">Παρακαλώ εισάγετε το επώνυμό σας</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="patName">Όνομα <span class="required">*</span></label>
+              <input type="text" id="patName" class="form-control" placeholder="Νίκος" autocomplete="given-name" required aria-required="true">
+              <span class="form-error" id="err-name" role="alert">Παρακαλώ εισάγετε το όνομά σας</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="patMobile">Κινητό Τηλέφωνο <span class="required">*</span></label>
+              <input type="tel" id="patMobile" class="form-control" placeholder="69XXXXXXXX" autocomplete="tel" required aria-required="true" maxlength="10">
+              <span class="form-error" id="err-mobile" role="alert">Εισάγετε έγκυρο κινητό τηλέφωνο</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="patEmail">Email <span style="color:var(--text-muted);font-weight:400">(προαιρετικό)</span></label>
+              <input type="email" id="patEmail" class="form-control" placeholder="email@example.com" autocomplete="email">
+              <span class="form-error" id="err-email" role="alert">Μη έγκυρη διεύθυνση email</span>
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="patNotes">Αιτία επίσκεψης / Σημειώσεις <span style="color:var(--text-muted);font-weight:400">(προαιρετικό)</span></label>
+              <textarea id="patNotes" class="form-control" rows="3" placeholder="Π.χ. έλεγχος, εμβολιασμός, πυρετός..."></textarea>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div style="margin-top:16px;display:flex;align-items:flex-start;gap:10px">
+            <input type="checkbox" id="termsCheck" style="margin-top:3px;width:16px;height:16px;cursor:pointer;accent-color:var(--primary)" required>
+            <label for="termsCheck" style="font-size:0.82rem;color:var(--text-secondary);cursor:pointer;line-height:1.5">
+              Συμφωνώ με τη <a href="#" style="color:var(--primary)" onclick="return false">Πολιτική Προστασίας Δεδομένων</a> της κλινικής και αποδέχομαι τη χρήση των στοιχείων μου για την κράτηση ραντεβού.
+              <span style="color:var(--danger)">*</span>
+            </label>
+          </div>
+          <span class="form-error" id="err-terms" role="alert">Αποδεχτείτε τους όρους για να συνεχίσετε</span>
+        </form>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn" style="background:white;border:2px solid var(--border);color:var(--text-secondary);padding:12px 20px;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;font-family:inherit;font-size:0.9rem" onclick="goBackToStep1()">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Πίσω
+      </button>
+      <button class="submit-btn" style="flex:1;min-width:200px" onclick="submitBooking()">
+        <i class="fas fa-calendar-check" aria-hidden="true"></i>
+        Ολοκλήρωση Κράτησης
+      </button>
+    </div>
+  </div>
+
+  <!-- === SUCCESS SCREEN === -->
+  <div id="successScreen" class="success-screen">
+    <div class="card" style="max-width:500px;margin:0 auto">
+      <div class="card-body" style="padding:40px 28px">
+        <div class="success-icon" aria-hidden="true"><i class="fas fa-check"></i></div>
+        <h2>Το Ραντεβού Σας Κλείστηκε!</h2>
+        <p>Το ραντεβού σας καταχωρήθηκε επιτυχώς. Θα επικοινωνήσουμε μαζί σας σύντομα για επιβεβαίωση.</p>
+
+        <div class="success-details" role="region" aria-label="Λεπτομέρειες επιβεβαίωσης">
+          <div class="success-detail-row">
+            <i class="fas fa-user-md" aria-hidden="true"></i>
+            <span id="confDoctor"></span>
+          </div>
+          <div class="success-detail-row">
+            <i class="fas fa-calendar" aria-hidden="true"></i>
+            <span id="confDate"></span>
+          </div>
+          <div class="success-detail-row">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span id="confTime"></span>
+          </div>
+          <div class="success-detail-row">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span id="confPatient"></span>
+          </div>
+        </div>
+
+        <div class="alert alert-info" role="note" style="text-align:left;margin-bottom:20px">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          <span>Σε περίπτωση αλλαγής ή ακύρωσης, επικοινωνήστε μαζί μας τηλεφωνικά.</span>
+        </div>
+
+        <button onclick="resetBooking()" style="background:var(--primary);color:white;border:none;padding:12px 24px;border-radius:var(--radius-sm);font-weight:700;cursor:pointer;font-family:inherit;font-size:0.95rem;width:100%">
+          <i class="fas fa-plus" aria-hidden="true"></i> Νέα Κράτηση
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <p><strong>MARGIMED CLINIC</strong> &bull; Online Κράτηση Ραντεβού</p>
+  <p style="margin-top:4px">
+    <a href="/">Admin Panel</a> &bull;
+    © 2025 Margimed Clinic. Όλα τα δικαιώματα διατηρούνται.
+  </p>
+</footer>
+
+<script>
+'use strict';
+
+// ===== STATE =====
+let selectedDoctorId = 1;
+let selectedDate = '';
+let selectedTime = '';
+let appointments = [];
+let doctorSettings = {
+  1: { timeRanges: [{ start: "09:00", end: "13:00" }, { start: "17:00", end: "20:00" }], duration: 30, maxPerDay: 15, advanceDays: 30 },
+  2: { timeRanges: [{ start: "10:00", end: "14:00" }, { start: "18:00", end: "21:00" }], duration: 30, maxPerDay: 15, advanceDays: 30 }
+};
+let isLoading = false;
+
+const doctorNames = {
+  1: 'Παιδίατρος Μαρία Γκαρα',
+  2: 'Παθολόγος Ιωάννης Γεωργατζίνος'
+};
+
+// ===== HELPERS =====
+const today = () => new Date().toISOString().slice(0, 10);
+const esc = s => s ? String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])) : '';
+
+function formatDateGR(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('el-GR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// ===== API =====
+async function apiGet(table, params = '') {
+  const res = await fetch(`tables/${table}?limit=500${params}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+async function apiPost(table, data) {
+  const res = await fetch(`tables/${table}`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+// ===== LOAD INITIAL DATA =====
+async function loadInitialData() {
+  try {
+    const [appRes, settingsRes] = await Promise.all([
+      apiGet('appointments'),
+      apiGet('doctor_settings')
+    ]);
+    appointments = appRes.data || [];
+
+    if (settingsRes.data && settingsRes.data.length > 0) {
+      settingsRes.data.forEach(s => {
+        const did = parseInt(s.doctorId);
+        if (did === 1 || did === 2) {
+          doctorSettings[did] = {
+            settingsId: s.id,
+            timeRanges: JSON.parse(s.timeRanges || '[]'),
+            duration: parseInt(s.duration) || 30,
+            maxPerDay: parseInt(s.maxPerDay) || 15,
+            advanceDays: parseInt(s.advanceDays) || 30
+          };
+        }
+      });
+    }
+  } catch(e) {
+    console.error('Could not load settings, using defaults:', e);
+  }
+}
+
+// ===== DOCTOR SELECTION =====
+function selectDoctor(id) {
+  selectedDoctorId = id;
+  document.getElementById('doctorCard1').classList.toggle('selected', id === 1);
+  document.getElementById('doctorCard1').setAttribute('aria-checked', id === 1 ? 'true' : 'false');
+  document.getElementById('doctorCard2').classList.toggle('selected', id === 2);
+  document.getElementById('doctorCard2').setAttribute('aria-checked', id === 2 ? 'true' : 'false');
+
+  if (selectedDate) renderSlots();
+}
+
+// ===== DATE CHANGE =====
+function onDateChange() {
+  selectedDate = document.getElementById('bookingDate').value;
+  selectedTime = '';
+  if (selectedDate) {
+    document.getElementById('slotsCard').style.display = 'block';
+    renderSlots();
+  } else {
+    document.getElementById('slotsCard').style.display = 'none';
+  }
+}
+
+// ===== SLOT GENERATION =====
+function getAvailableSlots(doctorId, date) {
+  const settings = doctorSettings[doctorId];
+  if (!settings || !settings.timeRanges.length) return [];
+
+  const existingCount = appointments.filter(a =>
+    String(a.doctorId) === String(doctorId) && a.date === date && a.status !== 'cancelled'
+  ).length;
+  if (existingCount >= settings.maxPerDay) return [];
+
+  const bookedTimes = new Set(
+    appointments
+      .filter(a => String(a.doctorId) === String(doctorId) && a.date === date && a.status !== 'cancelled')
+      .map(a => a.time)
+  );
+
+  const slots = [];
+  for (const range of settings.timeRanges) {
+    let current = new Date(`2000-01-01T${range.start}:00`);
+    const endTime = new Date(`2000-01-01T${range.end}:00`);
+    while (current < endTime) {
+      const timeStr = current.toTimeString().slice(0, 5);
+      if (!bookedTimes.has(timeStr)) slots.push(timeStr);
+      current.setMinutes(current.getMinutes() + settings.duration);
+    }
+  }
+  return slots;
+}
+
+function renderSlots() {
+  const container = document.getElementById('slotsContainer');
+  container.innerHTML = `<div class="loading-slots"><div class="mini-spinner"></div><span>Φόρτωση διαθέσιμων ωρών...</span></div>`;
+
+  setTimeout(() => {
+    const today2 = today();
+    const advDays = doctorSettings[selectedDoctorId].advanceDays || 30;
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + advDays);
+    const maxDateStr = maxDate.toISOString().slice(0, 10);
+
+    if (selectedDate < today2) {
+      container.innerHTML = `<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i><span>Δεν μπορείτε να κλείσετε ραντεβού για παρελθούσα ημερομηνία.</span></div>`;
+      return;
+    }
+    if (selectedDate > maxDateStr) {
+      container.innerHTML = `<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i><span>Κρατήσεις διατίθενται έως ${advDays} ημέρες μπροστά.</span></div>`;
+      return;
+    }
+
+    const slots = getAvailableSlots(selectedDoctorId, selectedDate);
+
+    if (!slots.length) {
+      container.innerHTML = `
+        <div class="no-slots">
+          <i class="fas fa-calendar-times" aria-hidden="true"></i>
+          <p><strong>Δεν υπάρχουν διαθέσιμες ώρες</strong></p>
+          <p style="margin-top:6px;font-size:0.85rem">Παρακαλώ επιλέξτε άλλη ημερομηνία ή γιατρό.</p>
+        </div>`;
+      return;
+    }
+
+    const html = `
+      <div class="slots-header">
+        <span style="font-size:0.85rem;font-weight:600;color:var(--text-secondary)">${formatDateGR(selectedDate)}</span>
+        <span class="slots-count">${slots.length} ώρες διαθέσιμες</span>
+      </div>
+      <div class="slot-grid" role="radiogroup" aria-label="Διαθέσιμες ώρες">
+        ${slots.map(slot =>
+          `<button class="slot-btn ${selectedTime === slot ? 'selected' : ''}" 
+            data-time="${esc(slot)}" 
+            onclick="selectSlot('${esc(slot)}')"
+            role="radio"
+            aria-checked="${selectedTime === slot ? 'true' : 'false'}"
+            aria-label="Ώρα ${esc(slot)}">
+            <i class="fas fa-clock" style="font-size:0.75rem" aria-hidden="true"></i>
+            ${esc(slot)}
+          </button>`
+        ).join('')}
+      </div>
+      ${selectedTime ? `<div style="margin-top:14px">
+        <button onclick="proceedToStep2()" style="background:var(--primary);color:white;border:none;padding:12px 24px;border-radius:var(--radius-sm);font-weight:700;cursor:pointer;font-family:inherit;font-size:0.95rem;display:flex;align-items:center;gap:8px">
+          Συνέχεια <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>` : `<div style="margin-top:12px;font-size:0.82rem;color:var(--text-muted)"><i class="fas fa-info-circle" aria-hidden="true"></i> Κάντε κλικ σε μια ώρα για να τη επιλέξετε</div>`}
+    `;
+    container.innerHTML = html;
+  }, 300);
+}
+
+function selectSlot(time) {
+  selectedTime = time;
+  renderSlots();
+}
+
+// ===== STEP NAVIGATION =====
+function proceedToStep2() {
+  if (!selectedTime) {
+    alert('Παρακαλώ επιλέξτε ώρα');
+    return;
+  }
+  setStep(1, 'done');
+  setStep(2, 'active');
+  document.getElementById('conn1').classList.add('done');
+  document.getElementById('progressFill').style.width = '50%';
+  document.getElementById('progressBar').setAttribute('aria-valuenow', '50');
+
+  document.getElementById('summaryDoctor').textContent = doctorNames[selectedDoctorId];
+  document.getElementById('summaryDate').textContent = formatDateGR(selectedDate);
+  document.getElementById('summaryTime').textContent = selectedTime;
+
+  document.getElementById('stepPanel1').style.display = 'none';
+  document.getElementById('stepPanel2').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goBackToStep1() {
+  setStep(1, 'active');
+  setStep(2, 'pending');
+  document.getElementById('conn1').classList.remove('done');
+  document.getElementById('progressFill').style.width = '25%';
+  document.getElementById('progressBar').setAttribute('aria-valuenow', '25');
+
+  document.getElementById('stepPanel1').style.display = 'block';
+  document.getElementById('stepPanel2').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setStep(num, state) {
+  const step = document.getElementById(`step${num}`);
+  step.classList.remove('active', 'done');
+  if (state !== 'pending') step.classList.add(state);
+  if (state === 'active') step.setAttribute('aria-current', 'step');
+  else step.removeAttribute('aria-current');
+}
+
+// ===== FORM VALIDATION =====
+function validateForm() {
+  let valid = true;
+  const errors = {};
+
+  const surname = document.getElementById('patSurname').value.trim();
+  const name = document.getElementById('patName').value.trim();
+  const mobile = document.getElementById('patMobile').value.trim();
+  const email = document.getElementById('patEmail').value.trim();
+  const terms = document.getElementById('termsCheck').checked;
+
+  if (!surname) { errors.surname = true; valid = false; }
+  if (!name) { errors.name = true; valid = false; }
+  if (!mobile || !/^[0-9]{10}$/.test(mobile)) { errors.mobile = true; valid = false; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errors.email = true; valid = false; }
+  if (!terms) { errors.terms = true; valid = false; }
+
+  ['surname','name','mobile','email','terms'].forEach(f => {
+    const errEl = document.getElementById(`err-${f}`);
+    const inputEl = document.getElementById(f === 'terms' ? 'termsCheck' : `pat${f.charAt(0).toUpperCase() + f.slice(1)}`);
+    if (errEl) errEl.classList.toggle('visible', !!errors[f]);
+    if (inputEl && f !== 'terms') inputEl.classList.toggle('error', !!errors[f]);
+  });
+
+  return valid;
+}
+
+// ===== SUBMIT BOOKING =====
+async function submitBooking() {
+  if (!validateForm()) return;
+  if (isLoading) return;
+
+  const surname = document.getElementById('patSurname').value.trim();
+  const name = document.getElementById('patName').value.trim();
+  const mobile = document.getElementById('patMobile').value.trim();
+  const email = document.getElementById('patEmail').value.trim();
+  const notes = document.getElementById('patNotes').value.trim();
+
+  isLoading = true;
+  const submitBtn = document.querySelector('.submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<div class="mini-spinner" style="border-color:rgba(255,255,255,0.3);border-top-color:white"></div> Αποθήκευση...';
+
+  try {
+    const freshApps = await apiGet('appointments');
+    appointments = freshApps.data || [];
+
+    const stillAvailable = getAvailableSlots(selectedDoctorId, selectedDate).includes(selectedTime);
+    if (!stillAvailable) {
+      showError('Λυπούμαστε, η επιλεγμένη ώρα δεν είναι πλέον διαθέσιμη. Παρακαλώ επιλέξτε άλλη ώρα.');
+      isLoading = false;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Ολοκλήρωση Κράτησης';
+      goBackToStep1();
+      return;
+    }
+
+    let patient;
+    const allPatients = await apiGet('patients');
+    const existingPatient = (allPatients.data || []).find(p =>
+      (p.surname || '').toLowerCase() === surname.toLowerCase() &&
+      (p.name || '').toLowerCase() === name.toLowerCase() &&
+      p.mobile === mobile
+    );
+
+    if (existingPatient) {
+      patient = existingPatient;
+      if (email && !patient.email) {
+        try {
+          await fetch(`tables/patients/${patient.id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ email })
+          });
+        } catch(e) { /* non-critical */ }
+      }
+    } else {
+      patient = await apiPost('patients', {
+        surname, name, mobile, email,
+        country: 'Ελλάδα', referral: 'Online'
+      });
+    }
+
+    const apptData = {
+      doctorId: String(selectedDoctorId),
+      patientId: patient.id,
+      patientName: `${surname} ${name}`.trim(),
+      patientPhone: mobile,
+      date: selectedDate,
+      time: selectedTime,
+      status: 'pending',
+      source: 'online',
+      notes: notes
+    };
+    const created = await apiPost('appointments', apptData);
+    appointments.push(created);
+
+    showSuccess(surname, name);
+  } catch(e) {
+    console.error('Booking error:', e);
+    showError('Παρουσιάστηκε σφάλμα κατά την κράτηση. Παρακαλώ δοκιμάστε ξανά.');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Ολοκλήρωση Κράτησης';
+  } finally {
+    isLoading = false;
+  }
+}
+
+function showSuccess(surname, name) {
+  setStep(2, 'done');
+  setStep(3, 'done');
+  setStep(4, 'active');
+  document.getElementById('conn2').classList.add('done');
+  document.getElementById('conn3').classList.add('done');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressBar').setAttribute('aria-valuenow', '100');
+
+  document.getElementById('confDoctor').textContent = doctorNames[selectedDoctorId];
+  document.getElementById('confDate').textContent = formatDateGR(selectedDate);
+  document.getElementById('confTime').textContent = selectedTime;
+  document.getElementById('confPatient').textContent = `${surname} ${name}`;
+
+  document.getElementById('stepPanel2').style.display = 'none';
+  document.getElementById('successScreen').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showError(msg) {
+  const oldErr = document.querySelector('.booking-error-alert');
+  if (oldErr) oldErr.remove();
+
+  const errDiv = document.createElement('div');
+  errDiv.className = 'alert alert-error booking-error-alert';
+  errDiv.role = 'alert';
+  errDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>${esc(msg)}</span>`;
+  document.getElementById('stepPanel2').prepend(errDiv);
+  errDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetBooking() {
+  selectedDoctorId = 1;
+  selectedDate = '';
+  selectedTime = '';
+
+  document.getElementById('patientForm').reset();
+  document.getElementById('bookingDate').value = '';
+  document.getElementById('slotsCard').style.display = 'none';
+  document.getElementById('slotsContainer').innerHTML = '';
+
+  [1,2,3,4].forEach(n => setStep(n, 'pending'));
+  setStep(1, 'active');
+  ['conn1','conn2','conn3'].forEach(id => document.getElementById(id).classList.remove('done'));
+  document.getElementById('progressFill').style.width = '25%';
+  document.getElementById('progressBar').setAttribute('aria-valuenow', '25');
+
+  selectDoctor(1);
+
+  document.getElementById('stepPanel1').style.display = 'block';
+  document.getElementById('stepPanel2').style.display = 'none';
+  document.getElementById('successScreen').classList.remove('visible');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== INIT =====
+function init() {
+  const dateInput = document.getElementById('bookingDate');
+  const minDate = today();
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 30);
+  dateInput.min = minDate;
+  dateInput.max = maxDate.toISOString().slice(0, 10);
+
+  loadInitialData();
+}
+
+init();
+</script>
+</body>
+</html>

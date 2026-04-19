@@ -89,7 +89,6 @@ app.put('/tables/appointments/:id', async (req, res) => {
     const { id } = req.params;
     const { doctorId, patientId, patientName, patientPhone, date, time, status, source, notes } = req.body;
     
-    // Έλεγχος σύγκρουσης κατά την ενημέρωση
     const existing = await pool.query(
       `SELECT id FROM appointments WHERE doctor_id = $1 AND date = $2 AND time = $3 AND id != $4 AND status != 'cancelled'`,
       [doctorId, date, time, id]
@@ -184,7 +183,7 @@ async function initDB() {
       (2, 'Παθολόγος Ιωάννης Γεωργατζίνος', '[{"start":"10:00","end":"14:00"},{"start":"18:00","end":"21:00"}]', 30, 15, 30, '["Monday","Tuesday","Wednesday","Thursday","Friday"]', 30)
     ON CONFLICT (doctor_id) DO NOTHING;
   `);
-  console.log('Database updated with days_of_week and slot_duration');
+  console.log('Database initialized with days_of_week and slot_duration');
 }
 
 initDB().then(() => {
